@@ -63,7 +63,7 @@ namespace PdfUploader.Controllers
         {
             if (file == null) return BadRequest();
             await _blobStorage.Upload(file);
-            return Ok(file);
+            return Ok(file); //works
         }
 
         [HttpDelete]
