@@ -15,7 +15,7 @@ namespace PdfUploader.Controllers
         {
             _blobStorage = storageService;
         }
-        public IActionResult Get()
+        protected IActionResult Get()
         {
             return Ok("The server is working");
         }
