@@ -1,4 +1,4 @@
-﻿namespace PdfUploader.Models
+﻿namespace PdfUploader.Models.Requests
 {
     public class UploadFileRequest
     {

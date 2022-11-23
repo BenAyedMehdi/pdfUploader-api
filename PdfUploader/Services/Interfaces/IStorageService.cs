@@ -1,6 +1,6 @@
 ﻿using Azure.Storage.Blobs.Models;
 
-namespace PdfUploader.Services
+namespace PdfUploader.Services.Interfaces
 {
     public interface IStorageService
     {
@@ -9,6 +9,6 @@ namespace PdfUploader.Services
         Task DownloadBlob(string blobName);
         Task<IEnumerable<string>> ListBlobsAsync();
         Task UploadByFilePath(string filePath, string fileName);
-        Task DeleteBlobAsync(string blobName);  
+        Task DeleteBlobAsync(string blobName);
     }
 }

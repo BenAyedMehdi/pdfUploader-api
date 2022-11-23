@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using PdfUploader.Models;
-using PdfUploader.Services;
+using PdfUploader.Models.Requests;
+using PdfUploader.Services.Interfaces;
 
 namespace PdfUploader.Controllers
 {

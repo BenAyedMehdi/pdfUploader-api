@@ -1,5 +1,8 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using PdfUploader.Data;
 using PdfUploader.Services;
+using PdfUploader.Services.Interfaces;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,24 +27,26 @@ builder.Services.AddSwaggerGen(c =>
     var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
     c.IncludeXmlComments(xmlPath);
 });
+builder.Services.AddDbContext<DocumentsDbContext>(o =>
+{
+    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnetion"));
+});
+
 builder.Services.AddAzureClients(b =>
     b.AddBlobServiceClient(builder.Configuration.GetConnectionString("BlobStorage")));
 builder.Services.AddSingleton<IStorageService, StorageService>();
+builder.Services.AddScoped<IDocumentsService, DocumentsService>();
 
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "PDF upload");
-        c.RoutePrefix = string.Empty;
-    });
-}
 
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "PDF upload");
+    c.RoutePrefix = string.Empty;
+});
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
