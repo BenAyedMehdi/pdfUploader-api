@@ -19,7 +19,7 @@ namespace PdfUploader.Controllers
         {
             return Ok("The server is working");
         }
-        
+
 
         [HttpGet]
         [Route("download/{blobName}")]
@@ -31,12 +31,12 @@ namespace PdfUploader.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ListBlobs() 
+        public async Task<IActionResult> ListBlobs()
         {
             return Ok(await _blobStorage.ListBlobsAsync());
         }
 
-        
+
         [HttpGet]
         [Route("{blobName}")]
         public async Task<IActionResult> GetBlobAsync(string blobName)
@@ -45,19 +45,19 @@ namespace PdfUploader.Controllers
             var blob = await _blobStorage.GetBlobAsync(blobName);
             return File(blob.Content.ToArray(), blob.Details.ContentType);
         }
-        
+
 
         [HttpPost]
         [Route("path")]
         public async Task<IActionResult> UploadByPath([FromBody] UploadFileRequest request)
         {
             if (request.filePath == null) return BadRequest();
-            await _blobStorage.UploadByFilePath(request.filePath, request.fileName); 
+            await _blobStorage.UploadByFilePath(request.filePath, request.fileName);
             return Ok();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadFile(IFormFile file)
+        public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
         {
             if (file == null) return BadRequest();
             await _blobStorage.Upload(file);
