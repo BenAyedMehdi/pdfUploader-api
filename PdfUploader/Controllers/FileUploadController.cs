@@ -31,7 +31,6 @@ namespace PdfUploader.Controllers
         }
 
         [HttpGet]
-        [Route("list")]
         public async Task<IActionResult> ListBlobs() 
         {
             return Ok(await _blobStorage.ListBlobsAsync());
@@ -49,7 +48,7 @@ namespace PdfUploader.Controllers
         
 
         [HttpPost]
-        [Route("upload")]
+        [Route("path")]
         public async Task<IActionResult> UploadByPath([FromBody] UploadFileRequest request)
         {
             if (request.filePath == null) return BadRequest();
@@ -58,7 +57,6 @@ namespace PdfUploader.Controllers
         }
 
         [HttpPost]
-        [Route("uploadfile")]
         public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file == null) return BadRequest();
@@ -67,7 +65,6 @@ namespace PdfUploader.Controllers
         }
 
         [HttpDelete]
-        [Route("{blobName}")]
         public async Task<IActionResult> Delete(string blobName)
         {
             if (blobName == null) return BadRequest();

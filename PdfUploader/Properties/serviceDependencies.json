@@ -4,6 +4,11 @@
       "type": "storage",
       "connectionId": "ConnectionStrings:BlobStorage",
       "dynamicId": null
+    },
+    "mssql1": {
+      "type": "mssql",
+      "connectionId": "ConnectionStrings:DefaultConnetion",
+      "dynamicId": null
     }
   }
 }
