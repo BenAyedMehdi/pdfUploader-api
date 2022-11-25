@@ -65,7 +65,8 @@ namespace PdfUploader.Services
             var contentType = formFile.ContentType;
             var containerName = _config.GetConnectionString("ContainerName");
             var blobContainer = _client.GetBlobContainerClient(containerName);
-            var blobClient = blobContainer.GetBlobClient(formFile.FileName);
+            var id = Guid.NewGuid().ToString();
+            var blobClient = blobContainer.GetBlobClient(id);
 
             using var stream = formFile.OpenReadStream();
             await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = contentType }  ) ;
