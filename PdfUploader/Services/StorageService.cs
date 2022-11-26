@@ -60,7 +60,7 @@ namespace PdfUploader.Services
             }
         }
 
-        public async Task Upload(IFormFile formFile)
+        public async Task<string> Upload(IFormFile formFile)
         {
             var contentType = formFile.ContentType;
             var containerName = _config.GetConnectionString("ContainerName");
@@ -70,6 +70,7 @@ namespace PdfUploader.Services
 
             using var stream = formFile.OpenReadStream();
             await blobClient.UploadAsync(stream, new BlobHttpHeaders { ContentType = contentType }  ) ;
+            return blobClient.Name;
         }
 
         public async Task UploadByFilePath(string filePath, string fileName)

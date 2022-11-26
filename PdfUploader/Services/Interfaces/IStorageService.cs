@@ -4,7 +4,7 @@ namespace PdfUploader.Services.Interfaces
 {
     public interface IStorageService
     {
-        Task Upload(IFormFile formFile);
+        Task<string> Upload(IFormFile formFile);
         Task<BlobDownloadResult> GetBlobAsync(string blobName);
         Task DownloadBlob(string blobName);
         Task<IEnumerable<string>> ListBlobsAsync();

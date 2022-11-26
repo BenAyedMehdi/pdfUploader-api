@@ -60,8 +60,8 @@ namespace PdfUploader.Controllers
         public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
         {
             if (file == null) return BadRequest();
-            await _blobStorage.Upload(file);
-            return Ok(file); //works
+            var res = await _blobStorage.Upload(file);
+            return Ok(res); //works
         }
 
         [HttpDelete]
