@@ -10,14 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-
-var installers = typeof(Program).Assembly.ExportedTypes
-    .Where(type => typeof(IInstaller).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
-    .Select(Activator.CreateInstance)
-    .Cast<IInstaller>()
-    .ToList();
-installers.ForEach(installer => installer.InstallServices(builder.Services, builder.Configuration));
-
+builder.Services.InstallServicesInAssembly(builder.Configuration);
 
 var app = builder.Build();
 
