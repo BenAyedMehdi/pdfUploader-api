@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PdfUploader.Models.Requests;
 using PdfUploader.Services.Interfaces;
 
-namespace PdfUploader.Controllers
+namespace PdfUploader.Controllers.V1
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -70,6 +70,6 @@ namespace PdfUploader.Controllers
             if (blobName == null) return BadRequest();
             await _blobStorage.DeleteBlobAsync(blobName);
             return Ok();
-        } 
+        }
     }
 }
