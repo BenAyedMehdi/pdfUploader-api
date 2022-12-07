@@ -10,6 +10,7 @@
         public static class Documents
         {
             public const string GetAll = $"{Base}/documents";
+            public const string Get = Base + "/documents/{documentId}";
         }
     }
 }
