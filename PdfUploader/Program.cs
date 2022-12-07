@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
 using PdfUploader.Data;
+using PdfUploader.Installers;
 using PdfUploader.Services;
 using PdfUploader.Services.Interfaces;
 using System.Reflection;
@@ -9,33 +10,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("MyAllowedOrigins",
-        policy =>
-        {
-            policy.WithOrigins("*")
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
-});
-builder.Services.AddSwaggerGen(c =>
-{
-    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-    c.IncludeXmlComments(xmlPath);
-});
-builder.Services.AddDbContext<DocumentsDbContext>(o =>
-{
-    o.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnetion"));
-});
 
-builder.Services.AddAzureClients(b =>
-    b.AddBlobServiceClient(builder.Configuration.GetConnectionString("BlobStorage")));
-builder.Services.AddSingleton<IStorageService, StorageService>();
-builder.Services.AddScoped<IDocumentsService, DocumentsService>();
+var installers = typeof(Program).Assembly.ExportedTypes
+    .Where(type => typeof(IInstaller).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract)
+    .Select(Activator.CreateInstance)
+    .Cast<IInstaller>()
+    .ToList();
+installers.ForEach(installer => installer.InstallServices(builder.Services, builder.Configuration));
 
 
 var app = builder.Build();
