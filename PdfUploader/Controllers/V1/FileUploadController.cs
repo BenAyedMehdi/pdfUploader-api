@@ -15,20 +15,6 @@ namespace PdfUploader.Controllers.V1
         {
             _blobStorage = storageService;
         }
-        protected IActionResult Get()
-        {
-            return Ok("The server is working");
-        }
-
-
-        [HttpGet]
-        [Route("download/{blobName}")]
-        public async Task<IActionResult> Download(string blobName) //Returns 500
-        {
-            if (blobName == null) return BadRequest();
-            await _blobStorage.DownloadBlob(blobName);
-            return Ok();
-        }
 
         [HttpGet]
         public async Task<IActionResult> ListBlobs()
@@ -46,16 +32,6 @@ namespace PdfUploader.Controllers.V1
             return File(blob.Content.ToArray(), blob.Details.ContentType);
         }
 
-
-        [HttpPost]
-        [Route("path")]
-        public async Task<IActionResult> UploadByPath([FromBody] UploadFileRequest request)
-        {
-            if (request.filePath == null) return BadRequest();
-            await _blobStorage.UploadByFilePath(request.filePath, request.fileName);
-            return Ok();
-        }
-
         [HttpPost]
         public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
         {
@@ -71,5 +47,30 @@ namespace PdfUploader.Controllers.V1
             await _blobStorage.DeleteBlobAsync(blobName);
             return Ok();
         }
+
+        /*
+        [HttpPost]
+        [Route("path")]
+        public async Task<IActionResult> UploadByPath([FromBody] UploadFileRequest request)
+        {
+            if (request.filePath == null) return BadRequest();
+            await _blobStorage.UploadByFilePath(request.filePath, request.fileName);
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("download/{blobName}")]
+        public async Task<IActionResult> Download(string blobName) //Returns 500
+        {
+            if (blobName == null) return BadRequest();
+            await _blobStorage.DownloadBlob(blobName);
+            return Ok();
+        }
+
+        protected IActionResult Get()
+        {
+            return Ok("The server is working");
+        }
+        */
     }
 }

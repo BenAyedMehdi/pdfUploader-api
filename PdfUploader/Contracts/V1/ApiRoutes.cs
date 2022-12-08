@@ -12,5 +12,11 @@
             public const string GetAll = $"{Base}/documents";
             public const string Get = Base + "/documents/{documentId}";
         }
+
+        public static class FileUpload
+        {
+            public const string GetAll = $"{Base}/FileUpload";
+            public const string Get = Base + "/FileUpload/{blobName}";
+        }
     }
 }
