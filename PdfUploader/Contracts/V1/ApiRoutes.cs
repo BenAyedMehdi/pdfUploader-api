@@ -18,5 +18,10 @@
             public const string GetAll = $"{Base}/FileUpload";
             public const string Get = Base + "/FileUpload/{blobName}";
         }
+        public static class Categories
+        {
+            public const string GetAll = $"{Base}/Categories";
+            public const string Get = Base + "/Categories/{categoryId}";
+        }
     }
 }

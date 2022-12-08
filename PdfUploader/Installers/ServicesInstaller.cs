@@ -9,7 +9,7 @@ namespace PdfUploader.Installers
         {
             services.AddSingleton<IStorageService, StorageService>();
             services.AddScoped<IDocumentsService, DocumentsService>();
-
+            services.AddScoped<ICategoriesService, CategoriesService>();
         }
     }
 }
