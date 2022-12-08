@@ -10,6 +10,6 @@ namespace PdfUploader.Services.Interfaces
         public Task<Document> Create(AddDocumentRequest request);
         public Task Delete(int id);
         public bool Exists(int id);
-        public Task<Document> Update(int id, Document request);
+        public Task<Document> Update(int id, EditDocumentRequest request);
     }
 }

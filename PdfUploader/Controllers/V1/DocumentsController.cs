@@ -47,7 +47,7 @@ namespace PdfUploader.Controllers.V1
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Document>> Put(int id, Document request)
+        public async Task<ActionResult<Document>> Put(int id, EditDocumentRequest request)
         {
             if (id == 0) return BadRequest();
             if (!_documentsService.Exists(id)) return NotFound();
