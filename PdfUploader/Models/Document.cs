@@ -10,7 +10,7 @@
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime ModifiedAt { get; set; } = DateTime.Now;
         public int Views { get; set; } = 0;
-        public int Dowloads { get; set; } = 0;  
-
+        public int Dowloads { get; set; } = 0;
+        public Category Category { get; set; }
     }
 }
