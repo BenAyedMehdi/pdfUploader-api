@@ -42,7 +42,7 @@ namespace PdfUploader.Controllers.V1
             var res = await _documentsService.Create(request);
             
             var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
-            var locationUrl = baseUrl + "/" + ApiRoutes.Documents.Get.Replace("{documentId", res.DocumentId.ToString());
+            var locationUrl = baseUrl + "/" + ApiRoutes.Documents.Get.Replace("{documentId}", res.DocumentId.ToString());
             return Created(locationUrl, res);
         }
 

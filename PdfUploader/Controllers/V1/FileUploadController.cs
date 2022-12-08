@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PdfUploader.Contracts.V1;
 using PdfUploader.Models.Requests;
 using PdfUploader.Services.Interfaces;
 
 namespace PdfUploader.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [Route(ApiRoutes.FileUpload.GetAll)]
     [ApiController]
     public class FileUploadController : ControllerBase
     {
@@ -37,7 +38,11 @@ namespace PdfUploader.Controllers.V1
         {
             if (file == null) return BadRequest();
             var res = await _blobStorage.Upload(file);
-            return Ok(res); //works
+
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUrl = baseUrl + "/" + ApiRoutes.FileUpload.Get.Replace("{blobName}", res.ToString());
+            return Created(locationUrl, res);
+
         }
 
         [HttpDelete]
