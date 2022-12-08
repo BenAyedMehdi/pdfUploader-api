@@ -10,5 +10,6 @@ namespace PdfUploader.Data
         }
 
         public DbSet<Document> Documents { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }
