@@ -18,7 +18,10 @@ namespace PdfUploader.Controllers.V1
             _categoriesService = categoriesService;
         }
 
-
+        /// <summary>
+        /// Get a list of all files categories
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Category>>> Get()
         {
@@ -26,6 +29,11 @@ namespace PdfUploader.Controllers.V1
             return Ok(list);
         }
 
+        /// <summary>
+        /// Get a category item by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Category>> Get(int id)
         {

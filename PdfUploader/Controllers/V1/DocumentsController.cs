@@ -18,7 +18,10 @@ namespace PdfUploader.Controllers.V1
             _documentsService = documentsService;
         }
 
-
+        /// <summary>
+        /// Get a list of all documents
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Document>>> Get()
         {
@@ -26,6 +29,11 @@ namespace PdfUploader.Controllers.V1
             return Ok(list);
         }
 
+        /// <summary>
+        /// Get a single document by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<Document>> Get(int id)
         {
@@ -35,6 +43,11 @@ namespace PdfUploader.Controllers.V1
             return document;
         }
 
+        /// <summary>
+        /// Create a new document
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<ActionResult<Document>> Post(AddDocumentRequest request)
         {
@@ -46,6 +59,12 @@ namespace PdfUploader.Controllers.V1
             return Created(locationUrl, res);
         }
 
+        /// <summary>
+        /// Update an existing document
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<ActionResult<Document>> Put(int id, EditDocumentRequest request)
         {
@@ -55,7 +74,11 @@ namespace PdfUploader.Controllers.V1
             return Ok(newDoc);
         }
 
-
+        /// <summary>
+        /// Delete a document by ID (doesn't delete blob file)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
         {

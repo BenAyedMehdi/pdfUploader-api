@@ -17,13 +17,21 @@ namespace PdfUploader.Controllers.V1
             _blobStorage = storageService;
         }
 
+        /// <summary>
+        /// Get a list of all blobs names
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<IActionResult> ListBlobs()
         {
             return Ok(await _blobStorage.ListBlobsAsync());
         }
 
-
+        /// <summary>
+        /// Get a file by specifying the blob name
+        /// </summary>
+        /// <param name="blobName"></param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{blobName}")]
         public async Task<IActionResult> GetBlobAsync(string blobName)
@@ -33,6 +41,11 @@ namespace PdfUploader.Controllers.V1
             return File(blob.Content.ToArray(), blob.Details.ContentType);
         }
 
+        /// <summary>
+        /// Create a new blob with a guid blobName
+        /// </summary>
+        /// <param name="file"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> UploadFile([FromForm] IFormFile file)
         {
@@ -44,7 +57,12 @@ namespace PdfUploader.Controllers.V1
             return Created(locationUrl, res);
 
         }
-
+        
+        /// <summary>
+        /// Delete a blob by blobName
+        /// </summary>
+        /// <param name="blobName"></param>
+        /// <returns></returns>
         [HttpDelete]
         public async Task<IActionResult> Delete(string blobName)
         {
