@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PdfUploader.Contracts.V1;
 using PdfUploader.Models;
+using PdfUploader.Models.Requests;
 using PdfUploader.Services;
 using PdfUploader.Services.Interfaces;
 
@@ -42,5 +43,18 @@ namespace PdfUploader.Controllers.V1
             if (category == null) return NotFound();
             return category;
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Category>> Post(AddCategoryRequest request)
+        {
+            if (request == null) return BadRequest();
+            var res = await _categoriesService.Create(request);
+
+            var baseUrl = $"{HttpContext.Request.Scheme}://{HttpContext.Request.Host.ToUriComponent()}";
+            var locationUrl = baseUrl + "/" + ApiRoutes.Categories.Get.Replace("{categoryId}", res.CategoryId.ToString());
+            return Created(locationUrl, res);
+        }
+
+
     }
 }
