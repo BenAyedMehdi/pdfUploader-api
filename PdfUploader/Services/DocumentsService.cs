@@ -44,7 +44,9 @@ namespace PdfUploader.Services
                 BlobName = request.BlobName,
                 CreatedAt = DateTime.Now,
                 Category = category,
-                DocumentPosition= position
+                DocumentPosition = position,
+                IsPublic = request.IsPublic,
+                Message = request.Message
             };
             _context.Documents.Add(doc);    
             await _context.SaveChangesAsync();

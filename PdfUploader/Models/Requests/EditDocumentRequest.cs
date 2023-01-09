@@ -12,5 +12,7 @@
         public int Views { get; set; } 
         public int Dowloads { get; set; }
         public int CategoryId { get; set; }
+        public bool IsPublic { get; set; } = true;
+        public string Message { get; set; } = string.Empty;
     }
 }

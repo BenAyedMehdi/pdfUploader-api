@@ -11,6 +11,9 @@
         public DateTime ModifiedAt { get; set; } = DateTime.Now;
         public int Views { get; set; } = 0;
         public int Dowloads { get; set; } = 0;
+        public bool IsPublic { get; set; } = true;
+        public string Message { get; set; } = string.Empty;
         public Category Category { get; set; }
+
     }
 }
