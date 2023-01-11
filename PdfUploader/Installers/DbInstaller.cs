@@ -1,5 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Azure;
+using Microsoft.Extensions.DependencyInjection;
 using PdfUploader.Data;
 
 namespace PdfUploader.Installers
@@ -12,6 +14,8 @@ namespace PdfUploader.Installers
             {
                 o.UseSqlServer(configuration.GetConnectionString("DefaultConnetion"));
             });
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<DocumentsDbContext>();
 
 
             services.AddAzureClients(b => {

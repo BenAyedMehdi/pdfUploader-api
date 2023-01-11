@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PdfUploader.Models;
 
 namespace PdfUploader.Data
 {
-    public class DocumentsDbContext : DbContext
+    public class DocumentsDbContext :  IdentityDbContext
     {
         public DocumentsDbContext(DbContextOptions<DocumentsDbContext> options) : base(options)
         {
