@@ -22,7 +22,7 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty;
 });
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 app.UseCors("MyAllowedOrigins");
 app.MapControllers();

@@ -4,7 +4,7 @@
     {
         public const string Root = "api";
         public const string Version = "v1";
-        public const string Base = $"{Root}/{Version}";
+        public const string Base = $"{Root}/{Version}"; // "api/v1"
 
 
         public static class Documents
@@ -22,6 +22,12 @@
         {
             public const string GetAll = $"{Base}/Categories";
             public const string Get = Base + "/Categories/{categoryId}";
+        }
+
+        public static class Identity
+        {
+            public const string Login = $"{Base}/identity/login";
+            public const string Register = Base + "/identity/register";
         }
     }
 }
