@@ -6,6 +6,9 @@ using PdfUploader.Services;
 using PdfUploader.Services.Interfaces;
 using System.Reflection;
 
+//Ok, we have some Azure subscription issues
+//We need, a develop branch and refactor the code
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
